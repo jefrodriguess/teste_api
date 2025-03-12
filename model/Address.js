@@ -23,7 +23,7 @@ const addressSchema = mongoose.Schema(
     estado: {
       type: String,
       required: true,
-      MaxLength: 2, //Estado de ter até no maxímo 2 caracter Ex: SP
+      maxLength: 2, //Estado de ter até no maxímo 2 caracter Ex: SP
     },
   },
   {
@@ -32,7 +32,7 @@ const addressSchema = mongoose.Schema(
 );
 
 // Cria modelo
-const Address = mongoose.model("Adress", addressSchema);
+const Address = mongoose.model("Address", addressSchema);
 
 // Exporta o modelo para ser usado
 module.exports = Address;
