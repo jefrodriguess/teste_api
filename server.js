@@ -12,8 +12,8 @@ const app = express();
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // Permite qualquer origem para req.
-  res.header("Access-Control-Allow-Methods", "GET", "POST"); //Permite apenas métodos GET e POST
-  res.header("Access-Control-Aloow-Headers", "Content-Type"); //Permite a cabeçalho nas req,
+  res.header("Access-Control-Allow-Methods", "GET, POST"); //Permite apenas métodos GET e POST
+  res.header("Access-Control-Allow-Headers", "Content-Type"); //Permite a cabeçalho nas req,
   next();
 });
 
@@ -33,14 +33,14 @@ app.get("/api/cep/:cep", async (req, res) => {
 });
 
 app.post("/api/address", async (req, res) => {
-  const { cep, lagradouro, bairro, cidade, estado } = req.body;
+  const { cep, logradouro, bairro, cidade, estado } = req.body;
 
   try {
-    const newAddress = new Address({ cep, lagradouro, bairro, cidade, estado });
+    const newAddress = new Address({ cep, logradouro, bairro, cidade, estado });
     await newAddress.save(); // salva o endereço no banco de dados
     // Retorna sucesso com os dados salvos
-    res.status(201).json({ menssage: "Edereço salvo com sucesso!" });
-  } catch (error) {
+    res.status(201).json({ message: "Endereço salvo com sucesso!" });
+  } catch (error) { 
     // Retorna erro se não salvar
     res.status(500).json({ error: "Erro ao salvar o endereçõ!" });
   }
@@ -64,4 +64,4 @@ mongoose
       console.log(`Servidor rodando em http://localhost:${port}`);
     });
   })
-  .catch((err) => console.log("Erro ao conectar ao MongoDB, err"));
+  .catch((err) => console.log("Erro ao conectar ao MongoDB:", err));
