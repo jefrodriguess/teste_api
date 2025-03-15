@@ -23,15 +23,15 @@ const addressSchema = mongoose.Schema(
     estado: {
       type: String,
       required: true,
-      maxLength: 2, //Estado de ter até no maxímo 2 caracter Ex: SP
+      MaxLength: 2, // Estado deve ter no maximo 2 caracter EX: SP
     },
   },
   {
-    timeStamp: true, //regitra o horário de registro
+    timeStamp: true, // Adiciona hora da criação e edição
   }
 );
 
-// Cria modelo
+// Cria o modelo
 const Address = mongoose.model("Address", addressSchema);
 
 // Exporta o modelo para ser usado

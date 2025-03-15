@@ -33,18 +33,22 @@ app.get("/api/cep/:cep", async (req, res) => {
 });
 
 app.post("/api/address", async (req, res) => {
+  // Corpo que deve ser enviado:
   const { cep, logradouro, bairro, cidade, estado } = req.body;
 
   try {
     const newAddress = new Address({ cep, logradouro, bairro, cidade, estado });
-    await newAddress.save(); // salva o endereço no banco de dados
+    await newAddress.save(); // Salva o endereço no banco de dados
     // Retorna sucesso com os dados salvos
-    res.status(201).json({ message: "Endereço salvo com sucesso!" });
-  } catch (error) { 
+    res
+      .status(201)
+      .json({ message: "Endereço salvo com sucesso!", data: newAddress });
+  } catch (error) {
     // Retorna erro se não salvar
-    res.status(500).json({ error: "Erro ao salvar o endereçõ!" });
+    res.status(500).json({ error: "Erro ao salvar o endereço!" });
   }
 });
+
 
 // Obtem as variaveis do .env
 const dbUser = process.env.DB_USER;
